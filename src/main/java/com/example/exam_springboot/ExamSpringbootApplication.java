@@ -23,6 +23,8 @@ public class ExamSpringbootApplication {
     public static void main(String[] args) {
         final ServletWebServerFactory serverFactory = new TomcatServletWebServerFactory();
         final WebServer webServer = serverFactory.getWebServer(servletContext -> {
+            final HelloController helloController = new HelloController();
+
             servletContext.addServlet("frontcontroller", new HttpServlet() {
                 @Override
                 protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -31,9 +33,11 @@ public class ExamSpringbootApplication {
                     if (req.getRequestURI().equals("/hello") && req.getMethod().equals(HttpMethod.GET.name())) {
                         final String name = req.getParameter("name");
 
+                        final String ret = helloController.hello(name);
+
                         resp.setStatus(HttpStatus.OK.value());
                         resp.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE);
-                        resp.getWriter().println("hello " + name);
+                        resp.getWriter().println(ret);
 
                     } else if (req.getRequestURI().equals("/user")) {
                         //
