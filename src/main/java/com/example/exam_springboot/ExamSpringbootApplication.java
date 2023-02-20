@@ -24,6 +24,7 @@ public class ExamSpringbootApplication {
     public static void main(String[] args) {
         final GenericApplicationContext applicationContext = new GenericApplicationContext();
         applicationContext.registerBean(HelloController.class);
+        applicationContext.registerBean(SimpleHelloService.class);
         // 컨테이너 초기화 -> applicationContext 가 빈을 모두 생성함
         applicationContext.refresh();
 
