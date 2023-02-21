@@ -10,22 +10,25 @@ import org.springframework.web.servlet.DispatcherServlet;
 public class ExamSpringbootApplication {
 
     public static void main(String[] args) {
-        final GenericWebApplicationContext applicationContext = new GenericWebApplicationContext();
+        final GenericWebApplicationContext applicationContext = new GenericWebApplicationContext() {
+            @Override
+            protected void onRefresh() {
+                super.onRefresh();
+
+                final ServletWebServerFactory serverFactory = new TomcatServletWebServerFactory();
+                final WebServer webServer = serverFactory.getWebServer(servletContext -> {
+                    servletContext.addServlet("dispatcherServlet",
+                                              new DispatcherServlet(this))
+                        .addMapping("/*");
+                });
+                webServer.start();
+            }
+        };
+
         applicationContext.registerBean(HelloController.class);
         applicationContext.registerBean(SimpleHelloService.class);
         // 컨테이너 초기화 -> applicationContext 가 빈을 모두 생성함
         applicationContext.refresh();
-
-
-        final ServletWebServerFactory serverFactory = new TomcatServletWebServerFactory();
-        final WebServer webServer = serverFactory.getWebServer(servletContext -> {
-            servletContext.addServlet("dispatcherServlet",
-                                      new DispatcherServlet(applicationContext))
-                .addMapping("/*");
-        });
-
-        webServer.start();
-
     }
 
 }
