@@ -1,5 +1,6 @@
 package com.example.exam_springboot;
 
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.server.WebServer;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
@@ -24,26 +25,7 @@ public class ExamSpringbootApplication {
     }
 
     public static void main(String[] args) {
-        final AnnotationConfigWebApplicationContext applicationContext = new AnnotationConfigWebApplicationContext() {
-            @Override
-            protected void onRefresh() {
-                super.onRefresh();
-
-                final ServletWebServerFactory serverFactory = this.getBean(ServletWebServerFactory.class);
-                final DispatcherServlet dispatcherServlet = this.getBean(DispatcherServlet.class);
-//                dispatcherServlet.setApplicationContext(this); // bean lifecycle 메서드에 의해 자동으로 applicationContext가 주입됨
-
-                final WebServer webServer = serverFactory.getWebServer(servletContext -> {
-                    servletContext.addServlet("dispatcherServlet", dispatcherServlet)
-                        .addMapping("/*");
-                });
-                webServer.start();
-            }
-        };
-
-        applicationContext.register(ExamSpringbootApplication.class);
-        // 컨테이너 초기화 -> applicationContext 가 빈을 모두 생성함
-        applicationContext.refresh();
+//        MySpringApplication.run(ExamSpringbootApplication.class, args);
+        SpringApplication.run(ExamSpringbootApplication.class, args);
     }
-
 }
