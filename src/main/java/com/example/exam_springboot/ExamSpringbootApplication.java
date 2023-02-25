@@ -11,19 +11,8 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 import org.springframework.web.servlet.DispatcherServlet;
 
 //@SpringBootApplication
-@Configuration // 자바 코드로 된 구성 정보임을 스프링에 알려주기 위해 사용
-@ComponentScan
+@MySpringBootAnnotation
 public class ExamSpringbootApplication {
-    @Bean
-    public ServletWebServerFactory servletWebServerFactory() {
-        return new TomcatServletWebServerFactory();
-    }
-
-    @Bean
-    public DispatcherServlet dispatcherServlet() {
-        return new DispatcherServlet();
-    }
-
     public static void main(String[] args) {
 //        MySpringApplication.run(ExamSpringbootApplication.class, args);
         SpringApplication.run(ExamSpringbootApplication.class, args);
