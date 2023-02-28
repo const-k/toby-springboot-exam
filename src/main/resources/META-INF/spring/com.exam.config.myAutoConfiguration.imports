@@ -2,3 +2,4 @@ com.exam.config.autoconfig.DispatcherServletConfig
 com.exam.config.autoconfig.TomcatWebServerConfig
 com.exam.config.autoconfig.JettyWebServerConfig
 com.exam.config.autoconfig.PropertyPlaceholderConfig
+com.exam.config.autoconfig.ServerPropertiesConfig
