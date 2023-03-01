@@ -37,6 +37,11 @@ public class HelloController {
         return helloService.sayHello(name);
     }
 
+    @GetMapping("/count")
+    public String count(String name) {
+        return name + ": " + helloService.countOf(name);
+    }
+
 //    // ApplicationContextAware 구현, 스프링 컨테이너 초기화되는 시점에 호출됨
 //    @Override
 //    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
