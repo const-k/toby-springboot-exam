@@ -3,13 +3,14 @@ package com.example.exam_springboot;
 import com.exam.config.MySpringBootApplication;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.annotation.PostConstruct;
 
-//@SpringBootApplication
+@SpringBootApplication
 @Slf4j
-@MySpringBootApplication
+//@MySpringBootApplication
 public class ExamSpringbootApplication {
 //    @Bean
 //    ApplicationRunner applicationRunner(Environment env) {
@@ -21,7 +22,9 @@ public class ExamSpringbootApplication {
 
     private final JdbcTemplate jdbcTemplate;
 
-    public ExamSpringbootApplication(JdbcTemplate jdbcTemplate) {this.jdbcTemplate = jdbcTemplate;}
+    public ExamSpringbootApplication(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     @PostConstruct
     void init() {
